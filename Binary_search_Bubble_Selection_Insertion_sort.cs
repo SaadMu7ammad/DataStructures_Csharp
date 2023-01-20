@@ -16,6 +16,10 @@ namespace section_5
             arr = new int[size];
             numelemnts = 0;
         }
+        public int[] get_arr()
+        {
+            return arr;
+        }
         public void insert(int element)
         {
             if (numelemnts > arr.Length)
@@ -29,6 +33,14 @@ namespace section_5
         public void showArray()
         {
             for (int i = 0; i < numelemnts; i++)
+            {
+                Console.Write(arr[i] + " ");
+            }
+            Console.WriteLine();
+        }
+        public void showALLArray()
+        {
+            for (int i = 0; i < arr.Length; i++)
             {
                 Console.Write(arr[i] + " ");
             }
@@ -101,6 +113,30 @@ namespace section_5
                // showArray();
             }
         }
+        public int BinarySearch(int[] arr, int target)
+        {
+            InsertionSort();// to do the bs the arr must be sorted
+            int R = numelemnts;
+            int L = 0;
+            while (L <= R)
+            {  
+                int mid = (R + L) / 2;
+                
+                 if (arr[mid] ==target)
+                {
+                    return mid;
+                }
+                else if (arr[mid] > target)
+                {
+                    R = mid - 1;
+                }
+                else if (arr[mid] < target)
+                {
+                    L = mid + 1;
+                }
+            }
+            return -1;
+        }
     };
     class Program
     {
@@ -110,11 +146,14 @@ namespace section_5
             Random rndm = new Random();
             for (int i = 0; i < 5; i++)
             {
-                obj.insert(rndm.Next(100));//100 is max fro random
+               obj.insert(rndm.Next(100));//100 is max fro random
             }
             obj.showArray();//before
-            obj.BubbleSort();
-            obj.showArray();//after
+            Console.WriteLine(obj.BinarySearch(obj.get_arr(),5));
+
+            obj.showArray();
+            obj.InsertionSort();
+            obj.showArray();
         }
     }
 }
