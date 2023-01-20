@@ -120,6 +120,47 @@ namespace linkedlist
             }
             return false;
         }
+        public void delAtIndx(int indx,int c=0)
+        {
+            if (indx < addedelemnts)
+            {
+                for (Node i = Head; i != null; i = i.Next, c++)
+                {
+                    if (c == indx)
+                    {
+                        if (indx == 0)//first position
+                        {
+                            Head = i.Next;
+                            i.Previous = null;
+                            Head.Previous = null;
+                          //  return true;
+                        }
+                        else if (indx == addedelemnts - 1)//last position
+                        {
+                            Tail = i.Previous;
+                            Tail.Next = null;
+                            
+                        }
+                        else//middle
+                        {
+                            Node tempprev = i.Previous;
+                            tempprev.Next = i.Next;
+                            i.Next.Previous = tempprev;
+                        }
+                        --addedelemnts;
+                        return;
+                       // return true;
+                    }
+
+
+                }
+            }
+            else
+            {
+                return;
+              //  return false;
+            }
+        }
 
         public Node Search(int value)
         {
@@ -169,6 +210,23 @@ namespace linkedlist
             list.InsertAtPosition(0,0);
             list.print();
             list.print_reverse();
+
+            Console.WriteLine();
+            list.delAtIndx(3);
+            list.print();
+
+            Console.WriteLine();
+            list.delAtIndx(0);
+            list.print();
+
+
+            Console.WriteLine();
+            list.delAtIndx(8);
+            list.print();
+
+            Console.WriteLine();
+            list.delAtIndx(6);
+            list.print();
         }
     }
 }
